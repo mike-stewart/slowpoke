@@ -13,7 +13,7 @@ module Slowpoke
         # https://github.com/heroku/rack-timeout/issues/39
         # can't do in timed_out state consistently
         if defined?(::PhusionPassenger)
-          `passenger-config detach-process #{Process.pid}`
+          `#{Slowpoke.passenger_config_bin} detach-process #{Process.pid}`
         else
           Process.kill("QUIT", Process.pid)
         end
