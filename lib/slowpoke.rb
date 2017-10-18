@@ -21,6 +21,10 @@ module Slowpoke
   def self.migration_statement_timeout
     ENV["MIGRATION_STATEMENT_TIMEOUT"]
   end
+
+  def self.passenger_config_bin
+    ENV['SLOWPOKE_PASSENGER_BIN'] == 'system' ? '/usr/bin/passenger-config' : 'passenger-config'
+  end
 end
 
 # custom error page
