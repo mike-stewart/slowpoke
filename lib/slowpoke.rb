@@ -15,7 +15,11 @@ module Slowpoke
 
   def self.timeout=(timeout)
     timeout = timeout.to_i if timeout.respond_to?(:to_i)
-    @timeout = Rack::Timeout.timeout = timeout
+    if Rails::VERSION::MAJOR >= 5
+      @timeout = Rack::Timeout.service_timeout = timeout
+    else
+      @timeout = Rack::Timeout.timeout = timeout
+    end
   end
 
   def self.migration_statement_timeout
